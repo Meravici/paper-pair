@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>paper-pair test</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../web-component-tester/browser.js"></script>
+
+    <link rel="import" href="../paper-pair.html">
+</head>
+<body>
+<test-fixture id="basic">
+    <template>
+        <paper-pair key="Dinosaur" value="Allosaurus"></paper-pair>
+    </template>
+</test-fixture>
+<test-fixture id="basic2">
+    <template>
+        <paper-pair key="" value="Allosaurus"></paper-pair>
+    </template>
+</test-fixture>
+
+<test-fixture id="basic3">
+    <template>
+        <paper-pair key="Dinosaurs" value=""></paper-pair>
+    </template>
+</test-fixture>
+
+<test-fixture id="hiding_key">
+    <template>
+        <paper-pair key="" value="Allosaurus" hide></paper-pair>
+    </template>
+</test-fixture>
+
+<test-fixture id="hiding_value">
+    <template>
+        <paper-pair key="Dinosaur" value="" hide></paper-pair>
+    </template>
+</test-fixture>
+
+<script>
+    describe('paper-pair', function () {
+        var basicElement;
+        beforeEach(function () {
+            basicElement = fixture('basic');
+        });
+
+        it('should instantiate', function () {
+            var element = fixture('basic');
+            assert.equal(element.is, 'paper-pair');
+        });
+
+        it('should be visible', function (done) {
+            var element1 = fixture('basic');
+            var element2 = fixture('basic2');
+            var element3 = fixture('basic3');
+            flush(function () {
+                expect(element1.$$("div")).to.not.equal(null);
+                expect(element2.$$("div")).to.not.equal(null);
+                expect(element3.$$("div")).to.not.equal(null);
+                done();
+            })
+        });
+
+        it('should display correct values', function(done){
+            var element = fixture('basic');
+            flush(function(){
+                expect(element.$$("div").innerHTML).to.contain("Dinosaur");
+                expect(element.$$("div").innerHTML).to.contain("Allosaurus");
+                done();
+            });
+
+        });
+
+        describe('hiding set', function () {
+            it('should hide when key is null', function (done) {
+                var element = fixture('hiding_key');
+                flush(function () {
+                    var contentRect = element.$$("div");
+                    expect(contentRect).to.equal(null);
+                    done();
+                });
+            });
+
+            it('should hide when value is null', function (done) {
+                var element = fixture('hiding_value');
+                flush(function () {
+                    var contentRect = element.$$("div");
+                    expect(contentRect).to.equal(null);
+                    done();
+                })
+
+            })
+        });
+    });
+</script>
+</body>
+</html>
