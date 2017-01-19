@@ -14,6 +14,7 @@ Install using bower: `bower install Meravici/paper-pair`
 <custom-element-demo>
   <template>
     <script src="../webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
     <link rel="import" href="paper-pair.html">
     <next-code-block></next-code-block>
   </template>
