@@ -1,0 +1,17 @@
+language: node_js
+sudo: required
+before_script:
+  - npm install -g bower polymer-cli web-component-tester
+  - bower install
+  - polymer lint --no-follow-dependencies --input paper-pair.html
+node_js: '6'
+addons:
+  firefox: latest
+  apt:
+    sources:
+      - google-chrome
+    packages:
+      - google-chrome-stable
+script:
+  - xvfb-run wct
+dist: trusty
